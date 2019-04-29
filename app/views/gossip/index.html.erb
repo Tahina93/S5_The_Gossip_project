@@ -13,13 +13,13 @@
       <h6> Gossip n° <%=i+1%> de : <%= gossip.user.first_name %> <%= gossip.user.last_name %></h6>
     </div>
     <div class="card-body">
-    <h5 class="card-title"><%= gossip.title %></h5>
-    <p class="card-text"><%= gossip.content %></p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title"><%= gossip.title %></h5>
+      <p class="card-text"><%= gossip.content %></p>
+      <a href="<%= single_gossip_path(gossip.id)%>" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="card-footer text-muted">
+      <p>Modifié le : <%= gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+    </div>
   </div>
-  <div class="card-footer text-muted">
-    <p>Modifié le : <%= gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
-  </div>
-</div>
 <% end %>
 <!-- /.container -->
