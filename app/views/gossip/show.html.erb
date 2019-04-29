@@ -1,5 +1,14 @@
+<%
+author = @gossip.user
+%>
+
 <h1><%= @gossip.title %></h1>
 <div>
-    <p><%= @gossip.content %></p>
-    <p><%= @gossip.user.first_name + " " + @gossip.user.last_name %></p>
+    <p><small><%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", single_user_path(author.id)%></small></p>
+    <blockquote><%= @gossip.content %></blockquote>
+    <p>
+        <% @gossip.tags.each do |tag| %>
+        <%= tag.title %>
+        <% end %>
+    </p>
 </div>
