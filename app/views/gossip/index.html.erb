@@ -1,34 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Gossip Project</title>
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Le nouveau facebook mais en mieux">
+  <meta name="author" content="Nous">
+  <title>The Gossip Project</title>
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-  <h1>Gossip#index</h1>
-  <p>Find me in app/views/gossip/index.html.erb</p>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"> &copy; The Gossip Project</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
+  <!-- Page Content -->
+  <div class="container">
 
-  <% @gossips.each_with_index do |gossip,i| %>
-  <p>
-    <!--Petit style bootstrap-->
-    <div class="card bg-light mb-3" style="max-width: 20rem;">
-      <div class="card-header"><li>
-       <a href="/@gossips/<%= i+1 %>/"> <%= gossip.user.first_name %> <!--Auteur du gossip -->
-       </a>
-     </li>
-   </div>
-   <div class="card-body">
-    <h4 class="card-title">
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">The Gossip Project </h1>
+      <p class="lead">Wesh wesh canne à pêche. Bienvenue sur la page d'acceuil du meilleur Gossip Project qui à intérêt à sortir dans le top 1 des meilleurs projet parce que franchement tu vas voir il tue sa mère. Mais si tu l'aime pas c'est pas grave nous on aime bien quand même koeur koeur bisous.
+        😘😘
+      </p>
+      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+    </header>
 
-    </h4>
-    <p class="card-text"> <%= gossip.content %> </p><!--Contenu du gossip-->
+    <% @gossips.each_with_index do |gossip,i| %>
+    <div class="card text-center">
+      <div class="card-header">
+       <h6> Gossip n° <%=i+1%> de : <%= gossip.user.first_name %> <%= gossip.user.last_name %></h6>
+     </div>
+     <div class="card-body">
+      <h5 class="card-title"><%= gossip.title %></h5>
+      <p class="card-text"><%= gossip.content %></p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="card-footer text-muted">
+      <p>Modifié le : <%= gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+    </div>
   </div>
-</div>
-</p>
-<% end %>
+  <% end %>
+  <!-- /.container -->
 
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
-</html>
 
+</html>
