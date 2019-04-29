@@ -1,14 +1,23 @@
-<%
-author = @gossip.user
-%>
+<% author = @gossip.user %>
 
-<h1><%= @gossip.title %></h1>
-<div>
-    <p><small><%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", single_user_path(author.id)%></small></p>
-    <blockquote><%= @gossip.content %></blockquote>
-    <p>
+<div class="card text-center">
+    <div class="card-header">
+      <h1><%= @gossip.title %></h1>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">
+        <small>de <%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", single_user_path(author.id)%></small>
+      </h2>
+      <blockquote class="card-text display-4"><%= @gossip.content %></blockquote>
+    </div>
+    <div class="card-footer text-muted">
+      <p>
         <% @gossip.tags.each do |tag| %>
         <%= tag.title %>
         <% end %>
-    </p>
-</div>
+      </p>
+      <p>
+        Modifié le : <%= @gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+      </p>
+      <a href="<%= root_path%>" class="btn btn-primary">Retour</a>
+    </div>

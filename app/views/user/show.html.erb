@@ -1,0 +1,24 @@
+<div class="card text-center">
+    <div class="card-header">
+      <h1><%= @author.first_name + " " + @author.last_name %></h1>
+    </div>
+    <div class="card-body text-left">
+      <p><strong>Nom&nbsp;:</strong> <%= @author.last_name %></p>
+      <p><strong>Prénom&nbsp;:</strong> <%= @author.first_name %></p>
+      <p><strong>Âge&nbsp;:</strong> <%= @author.age %></p>
+      <p><strong>E-mail&nbsp;:</strong> <%= @author.email %></p>
+      <p><strong>Adresse&nbsp;:</strong> <%= @author.city.name + " (" + @author.city.zip_code + ")" %></p>
+      <dl>
+        <dt><strong>Description&nbsp;:</strong></dt>
+        <dd><%= @author.description %></dd>
+      </div>
+      <hr/>
+      <h3>Ses potins&nbsp;:</h3>
+      <p>
+      <% @author.gossips.each do |gossip| %>
+        <%= link_to gossip.title, single_gossip_path(gossip.id) %><br/>
+      <% end %>
+      </p>  
+    <div class="card-footer text-muted text-center">
+      <a href="<%= root_path%>" class="btn btn-primary">Retour</a>
+    </div>
