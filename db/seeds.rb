@@ -5,7 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-require 'faker'
+require 'bundler'
+Bundler.require
 
 # Purge the city table before create 10 cities to fill it
 City.destroy_all
