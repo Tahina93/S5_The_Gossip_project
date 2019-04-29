@@ -1,2 +1,34 @@
-<h1>Gossip#index</h1>
-<p>Find me in app/views/gossip/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gossip Project</title>
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/slate/bootstrap.min.css">
+</head>
+<body>
+  <h1>Gossip#index</h1>
+  <p>Find me in app/views/gossip/index.html.erb</p>
+
+
+  <% @gossips.each_with_index do |gossip,i| %>
+  <p>
+    <!--Petit style bootstrap-->
+    <div class="card bg-light mb-3" style="max-width: 20rem;">
+      <div class="card-header"><li>
+       <a href="/@gossips/<%= i+1 %>/"> <%= gossip.user.first_name %> <!--Auteur du gossip -->
+       </a>
+     </li>
+   </div>
+   <div class="card-body">
+    <h4 class="card-title">
+
+    </h4>
+    <p class="card-text"> <%= gossip.content %> </p><!--Contenu du gossip-->
+  </div>
+</div>
+</p>
+<% end %>
+
+
+</body>
+</html>
+
