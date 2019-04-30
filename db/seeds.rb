@@ -13,7 +13,7 @@ City.destroy_all
 10.times do
   City.create(
     name: Faker::Games::Fallout.unique.location,
-    zip_code: Faker::Address.unique.zip
+    zip_code: Faker::Address.unique.zip_code
   )
 end
 
