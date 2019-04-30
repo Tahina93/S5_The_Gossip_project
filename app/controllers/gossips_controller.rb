@@ -1,4 +1,4 @@
-class GossipController < ApplicationController
+class GossipsController < ApplicationController
   def index()
     @success=params[:success]
     @gossips = Gossip.all.reverse
@@ -15,7 +15,7 @@ class GossipController < ApplicationController
     @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find(11))
 
     if @gossip.save  
-      redirect_to gossip_index_path(success: true)
+      redirect_to gossips_path(success: true)
     else
       render 'new'
     end
