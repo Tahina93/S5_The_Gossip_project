@@ -26,3 +26,6 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 index_backup.html
+
+# Ignore Gemfile.lock as bundle install doesn't return an error
+Gemfile.lock
