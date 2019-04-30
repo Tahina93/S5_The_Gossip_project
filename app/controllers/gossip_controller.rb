@@ -1,6 +1,7 @@
 class GossipController < ApplicationController
-  def index
-    @gossips = Gossip.all
+  def index()
+    @success=params[:success]
+    @gossips = Gossip.all.reverse
   end
 
   def show
@@ -11,5 +12,12 @@ class GossipController < ApplicationController
   end
   
   def create
+    @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find(11))
+
+    if @gossip.save  
+      redirect_to gossip_index_path(success: true)
+    else
+      render 'new'
+    end
   end
 end
