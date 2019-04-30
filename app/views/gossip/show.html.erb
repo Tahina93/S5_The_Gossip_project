@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <h2 class="card-title">
-        <small>de <%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", single_user_path(author.id)%></small>
+        <small>de <%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", user_path(author.id)%></small>
       </h2>
       <blockquote class="card-text display-4"><%= @gossip.content %></blockquote>
     </div>

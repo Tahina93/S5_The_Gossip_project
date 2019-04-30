@@ -16,7 +16,7 @@
       <h3>Ses potins&nbsp;:</h3>
       <p>
       <% @author.gossips.each do |gossip| %>
-        <%= link_to gossip.title, single_gossip_path(gossip.id) %><br/>
+        <%= link_to gossip.title, gossip_path(gossip.id) %><br/>
       <% end %>
       </p>  
     <div class="card-footer text-muted text-center">

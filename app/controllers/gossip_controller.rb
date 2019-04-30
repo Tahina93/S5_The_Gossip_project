@@ -7,6 +7,9 @@ class GossipController < ApplicationController
     @gossip = Gossip.find(params[:id])
   end
 
+  def new
+  end
+  
   def create
   end
 end
