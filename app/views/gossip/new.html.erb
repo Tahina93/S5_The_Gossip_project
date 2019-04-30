@@ -1,8 +1,31 @@
+
 <div class="text-center">
-    <h1>SOON A NEW FEATURE</h1>
-    <h2>ADD A NEW GOSSIP</h2>
-    <p>
-        But until then, you can check the gossips already written<br/>
-        <a href="<%= root_path%>" class="btn btn-primary">Return to home</a>
-    </p>
+  <h1>Création de ton gossip ! </h1>
+  <h2>Viens rejoindre la communauté des fdp qui balancent des gossips comme des ados de 15 ans en pleine puberté qui matent trop Gossip Girl ❤️️</h2>
+
+
+<!-- formulaire de création de gossip form_tag -->
+
+<%= form_tag url_for(action: 'create'), method: 'POST'  do %>
+
+  <%= label_tag 'title', 'Titre' %>
+  <%= text_field_tag 'title' %>
+  <br /> <br />
+
+  <%= label_tag 'content', 'Contenu' %>
+  <%= text_area_tag 'content' %>
+  <br /> <br />
+
+  <%= submit_tag "Créer potin" %>
+
+<% end %>
+
+<!-- ... -->
+
+ <p>
+    <br/>
+    <a href="<%= root_path%>" class="btn btn-primary">Retour à l'accueil </a>
+  </p>
+
 </div>
+
