@@ -1,0 +1,10 @@
+<%= form_tag url_for(action: 'update'), method: 'PUT', class:"card-body" do %>
+    <div class="form-group">
+      <%= label_tag 'content', 'Contenu' %>
+      <%= text_area_tag 'content', @comment.content, class: "form-control" %>
+      <input type=hidden name="gossip_id" value="<%= params[:gossip_id]%>" />
+    </div>
+    <div class="form-group">
+      <%= submit_tag "Editer le commentaire", class: "btn btn-info"%>
+    </div>
+  <% end %>

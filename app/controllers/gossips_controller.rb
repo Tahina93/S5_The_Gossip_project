@@ -1,7 +1,7 @@
 class GossipsController < ApplicationController
   def index()
     @success=params[:success]
-    @gossips = Gossip.all.reverse
+    @gossips = Gossip.order(:id).reverse
   end
 
   def show
