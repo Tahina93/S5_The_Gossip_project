@@ -19,6 +19,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+  	puts params
+    @comment = get_comment
+    @comment.destroy
+
+    redirect_to gossip_path(params[:gossip_id])
+  end
+
   private
 
   def get_comment

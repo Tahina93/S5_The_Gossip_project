@@ -34,7 +34,7 @@
         <% else %>
           <p>Pas encore de commentaire.</p>
         <% end%>
-        <form action="<%= gossip_comments_path(@gossip.id)%>"" method='post'>
+        <form action="<%= gossip_comments_path(@gossip.id)%>" method='post'>
           <div class="form-group">
             <%= label_tag 'content', 'Contenu' %>
             <%= text_area_tag 'content', comment.content, class: "form-control" %>
