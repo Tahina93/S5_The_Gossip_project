@@ -28,6 +28,7 @@
     </div>
     <div class="card-footer text-muted">
       <p>Modifié le : <%= gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      <p><%= gossip.comments.count %> commentaire<%= "s" if gossip.comments.count > 1 %>
     </div>
   </div>
 <% end %>

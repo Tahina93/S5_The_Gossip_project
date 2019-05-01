@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :gossips do
-    resources :comments
+    resources :comments, except: [:index, :new, :show]
   end
   resources :users
   resources :cities

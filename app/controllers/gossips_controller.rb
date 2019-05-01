@@ -7,6 +7,7 @@ class GossipsController < ApplicationController
   def show
     @success = params[:success]
     @gossip = get_gossip
+    @comments = Comment.where(gossip_id: @gossip.id)
   end
 
   def new

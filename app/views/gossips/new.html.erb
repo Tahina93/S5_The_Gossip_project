@@ -1,4 +1,4 @@
-<% gossip = @gossip ? @gossip : Gossip.new(title: "", content:"")%>
+<% gossip = @gossip ? @gossip : Gossip.new%>
 
 <% if gossip.errors.any? %>
   <aside class="alert alert-danger">

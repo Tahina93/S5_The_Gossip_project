@@ -1,4 +1,7 @@
-<% author = @gossip.user %>
+<% 
+  author = @gossip.user
+  comment = @comment ? @comment : Comment.new
+%>
 
 <% if @success %>
 <div class="alert alert-success">
@@ -18,6 +21,30 @@
       <p><%=link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-info" %>
         <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger" data-method= "delete" data-confirm= "T'en es certain ?">Supprimer</a>
       </p>
+      <div id="comment-zone">
+        <h3>Commentaires</h3>
+        <% unless @comments.empty? %>
+          <% @comments.each do |comment|%>
+            <div class="comment">
+              <p><strong><%= comment.user.first_name + " " + comment.user.last_name %></strong></p>
+              <div><%= comment.content %></div>
+              <p><%= link_to "Modifier", edit_gossip_comment_path(@gossip.id, comment.id), class: "btn btn-warning"%></p>
+            </div>
+          <% end %>
+        <% else %>
+          <p>Pas encore de commentaire.</p>
+        <% end%>
+        <form action="<%= gossip_comments_path(@gossip.id)%>"" method='post'>
+          <div class="form-group">
+            <%= label_tag 'content', 'Contenu' %>
+            <%= text_area_tag 'content', comment.content, class: "form-control" %>
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          </div>
+          <div class="form-group">
+            <%= submit_tag "Commenter", class: "btn btn-secondary"%>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="card-footer text-muted">
       <p>
