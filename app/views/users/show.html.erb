@@ -7,7 +7,7 @@
       <p><strong>Prénom&nbsp;:</strong> <%= @author.first_name %></p>
       <p><strong>Âge&nbsp;:</strong> <%= @author.age %></p>
       <p><strong>E-mail&nbsp;:</strong> <%= @author.email %></p>
-      <p><strong>Adresse&nbsp;:</strong> <%= @author.city.name + " (" + @author.city.zip_code + ")" %></p>
+      <p><strong>Adresse&nbsp;:</strong> <%= link_to @author.city.name, city_path(@author.city.id) %>  ( <%= @author.city.zip_code %> )</p>
       <dl>
         <dt><strong>Description&nbsp;:</strong></dt>
         <dd><%= @author.description %></dd>
@@ -20,5 +20,5 @@
       <% end %>
       </p>  
     <div class="card-footer text-muted text-center">
-      <a href="<%= root_path%>" class="btn btn-primary">Retour</a>
+      <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
     </div>

@@ -6,7 +6,7 @@
     </div>
     <div class="card-body">
       <h2 class="card-title">
-        <small>de <%= link_to author.first_name + " " + author.last_name + " (" + author.city.name + ")", user_path(author.id)%></small>
+        <small>de <%= link_to author.first_name + " " + author.last_name, user_path(author.id)%> ( <%=  link_to author.city.name,  city_path(author.city.id)%> ) </small>
       </h2>
       <blockquote class="card-text display-4"><%= @gossip.content %></blockquote>
     </div>
@@ -19,5 +19,5 @@
       <p>
         Modifié le : <%= @gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
       </p>
-      <a href="<%= root_path%>" class="btn btn-primary">Retour</a>
+      <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
     </div>

@@ -1,0 +1,16 @@
+<div class="card text-center">
+    <div class="card-header">
+      <h1><%= @city.name %> ( <%= @city.zip_code %> ) </h1>
+    </div>
+    <div class="card-body text-left">
+      <h3>Ses potins&nbsp;:</h3>
+      <p>
+      <% @city.users.each do |user| %>
+        <% user.gossips.each do |gossip| %>
+          <%= link_to gossip.title, gossip_path(gossip.id)%><br/>
+        <% end %>
+      <% end %>
+      </p>  
+    <div class="card-footer text-muted text-center">
+      <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
+    </div>
