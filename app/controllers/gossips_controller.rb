@@ -5,7 +5,7 @@ class GossipsController < ApplicationController
   end
 
   def show
-    @gossip = Gossip.find(params[:id])
+    @gossip = get_gossip
   end
 
   def new
@@ -19,5 +19,20 @@ class GossipsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+    @gossip = get_gossip
+  end
+
+  def update
+    
+  end
+
+
+  private
+
+  def get_gossip
+    Gossip.find(params[:id]) 
   end
 end
