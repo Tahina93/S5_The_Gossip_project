@@ -38,6 +38,12 @@ class GossipsController < ApplicationController
     end
   end
 
+  def destroy
+    @gossip = get_gossip
+    @gossip.destroy
+
+    redirect_to gossips_path
+  end
 
   private
 

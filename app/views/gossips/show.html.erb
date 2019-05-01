@@ -15,7 +15,9 @@
         <small>de <%= link_to author.first_name + " " + author.last_name, user_path(author.id)%> ( <%=  link_to author.city.name,  city_path(author.city.id)%> ) </small>
       </h2>
       <blockquote class="card-text display-4"><%= @gossip.content %></blockquote>
-      <p><%=link_to "Editer le potin", edit_gossip_path(@gossip.id), class: "btn btn-info" %></p>
+      <p><%=link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-info" %>
+        <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger" data-method= "delete" data-confirm= "T'en es certain ?">Supprimer</a>
+      </p>
     </div>
     <div class="card-footer text-muted">
       <p>
