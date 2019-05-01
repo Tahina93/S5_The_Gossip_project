@@ -2,7 +2,7 @@
 
 <% if gossip.errors.any? %>
   <aside class="alert alert-danger">
-    <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+    <p>Nous n'avons pas réussi à mettre à jour le potin pour la (ou les) raison(s) suivante(s) :</p>
     <ul>
       <% gossip.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -13,13 +13,12 @@
 
 <div class="card text-center">
   <div class="card-header">
-    <h1>Création de ton gossip ! </h1>
-    <h2>Viens rejoindre la communauté des fdp qui balancent des gossips comme des ados de 15 ans en pleine puberté qui matent trop Gossip Girl ❤️️</h2>
+    <h1>Edition de ton potin ! </h1>
   </div>
 
 <!-- formulaire de création de gossip form_tag -->
 
-  <%= form_tag url_for(action: 'create'), method: 'POST', class:"card-body" do %>
+  <%= form_tag url_for(action: 'update'), method: 'PUT', class:"card-body" do %>
     <div class="form-group">
       <%= label_tag 'title', 'Titre' %>
       <%= text_field_tag 'title', gossip.title, class: "form-control" %>
@@ -29,7 +28,7 @@
       <%= text_area_tag 'content', gossip.content, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= submit_tag "Créer potin", class: "btn btn-primary"%>
+      <%= submit_tag "Editer potin", class: "btn btn-info"%>
     </div>
   <% end %>
 
@@ -37,8 +36,7 @@
   <div class="card-footer text-muted">
     <p>
       <br/>
-      <a href="<%= root_path%>" class="btn btn-primary">Retour à l'accueil </a>
+      <a href="<%= root_path%>" class="btn btn-primary">Retour à l'accueil</a>
     </p>
   </div>
 </div>
-

@@ -5,6 +5,7 @@ class GossipsController < ApplicationController
   end
 
   def show
+    @success = params[:success]
     @gossip = get_gossip
   end
 
@@ -26,7 +27,15 @@ class GossipsController < ApplicationController
   end
 
   def update
-    
+    @gossip = get_gossip
+    if @gossip.update(
+      title: params[:title],
+      content: params[:content]
+      )
+      redirect_to gossip_path(params[:id], success: true)
+    else
+      render :edit
+    end
   end
 
 
