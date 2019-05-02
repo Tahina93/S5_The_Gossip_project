@@ -36,22 +36,22 @@ class GossipsController < ApplicationController
       title: params[:title],
       content: params[:content]
       )
-      redirect_to gossip_path(params[:id], success: true)
-    else
-      render :edit
-    end
+    redirect_to gossip_path(params[:id], success: true)
+  else
+    render :edit
   end
+end
 
-  def destroy
-    @gossip = get_gossip
-    @gossip.destroy
+def destroy
+  @gossip = get_gossip
+  @gossip.destroy
 
-    redirect_to gossips_path
-  end
+  redirect_to gossips_path
+end
 
-  private
+private
 
-  def get_gossip
-    Gossip.find(params[:id])
-  end
+def get_gossip
+  Gossip.find(params[:id])
+end
 end

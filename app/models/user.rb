@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -14,4 +14,5 @@ class User < ApplicationRecord
   has_many :recipient_to_pm_links, foreign_key: 'recipient_id'
   has_many :received_messages, foreign_key: 'received_message_id', class_name: "PrivateMessage", through: :recipient_to_pm_links
   has_many :comments
+  has_many :likes
 end
