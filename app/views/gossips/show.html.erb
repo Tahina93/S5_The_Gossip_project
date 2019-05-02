@@ -1,6 +1,6 @@
-<% 
-  author = @gossip.user
-  comment = @comment ? @comment : Comment.new
+<%
+author = @gossip.user
+comment = @comment ? @comment : Comment.new
 %>
 
 <% if @success %>
@@ -12,6 +12,7 @@
 <div class="card text-center">
     <div class="card-header">
       <h1><%= @gossip.title %></h1>
+      <h3> 👍 <%=@gossip.likes_amount%> 👍 </h3>
     </div>
     <div class="card-body">
       <h2 class="card-title">
@@ -53,16 +54,31 @@
             <%= submit_tag "Commenter", class: "btn btn-secondary"%>
           </div>
         </form>
-      </div>
+      <% already_liked=false%>
+      <% @gossip.likes.each do |like|%>
+      <%if like.user == current_user then already_liked = true end%>
+      <%end%>
+      <%case already_liked %>
+      <%when false %>
+      <form action="<%= gossip_likes_path(@gossip.id)%>" method='post'>
+        <%= submit_tag "👍", class: "btn btn-secondary"%>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      </form>
+      <%when true %>
+       <a class= "btn btn-success active" data-method= "delete" href="<%= gossip_like_path(@gossip.id) %>"> 👍</a>
+      <%end%>
+
+
     </div>
-    <div class="card-footer text-muted">
-      <p>
-        <% @gossip.tags.each do |tag| %>
-        <%= tag.title %>
-        <% end %>
-      </p>
-      <p>
-        Modifié le : <%= @gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
-      </p>
-      <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
-    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <p>
+      <% @gossip.tags.each do |tag| %>
+      <%= tag.title %>
+      <% end %>
+    </p>
+    <p>
+      Modifié le : <%= @gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    </p>
+    <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
+  </div>
