@@ -1,0 +1,61 @@
+<% user = @user ? @user : User.new%>
+
+
+<div class="card text-center">
+  <div class="card-header">
+    <h1>Salut petit nouveau ! </h1>
+  </div>
+
+<!-- formulaire de création de gossip form_tag -->
+
+  <%= form_tag url_for(action: 'create'), method: 'POST', class:"card-body" do %>
+     <div class="form-group">
+      <%= label_tag 'last_name', 'Nom' %>
+      <%= text_field_tag 'last_name', user.last_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'first_name', 'Prénom' %>
+      <%= text_field_tag 'first_name', user.first_name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'age', 'Âge' %>
+      <%= number_field_tag 'age', user.age, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'email', 'E-mail' %>
+      <%= email_field_tag 'email', user.email, class: "form-control" %>
+    </div>
+    <div class="form-group">
+        <%= label_tag 'city', 'Ville' %>
+        <select id="city" name= "city">
+        <option disabled selected>Choisis ta ville.</option>
+        <% @cities.each do |city| %>
+            <option value="<%= city.id %>"><%= city.name %></option>
+        <% end%>
+        </select>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'description', 'Description' %>
+      <%= text_area_tag 'description', user.description, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'password', 'Mot de passe' %>
+      <%= password_field_tag 'password', nil, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'password_confirmation', 'Confirmation' %>
+      <%= password_field_tag 'password_confirmation', nil, class: "form-control" %>
+    </div> 
+    <div class="form-group">
+      <%= submit_tag "Créer user", class: "btn btn-primary"%>
+    </div>
+  <% end %>
+
+<!-- ... -->
+  <div class="card-footer text-muted">
+    <p>
+      <br/>
+      <a href="<%= root_path%>" class="btn btn-primary">Retour à l'accueil </a>
+    </p>
+  </div>
+</div>
