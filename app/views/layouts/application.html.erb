@@ -26,12 +26,18 @@
           <li class="nav-item">
             <a class="nav-link" href="<%= contact_path %>">Contact</a>
           </li>
+          <% unless session[:user_id] %>
           <li class="nav-item">
             <a class="nav-link" href="<%= new_user_path %>">S'inscrire</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<%= new_session_path %>">Se connecter</a>
           </li>
+          <% else%>
+          <li>
+            <a href="<%= session_path(session[:user_id]) %>" class="nav-link" data-method= "delete">Se deconnecter</a>
+          </li>
+          <% end %>
         </ul>
       </div>
     </div>
