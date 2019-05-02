@@ -10,10 +10,16 @@ Bundler.require
 
 # Purge the city table before create 10 cities to fill it
 City.destroy_all
+
 10.times do
+  _zip_code=""
+  until _zip_code.match(/\A(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}\z/)
+    _zip_code = Faker::Address.unique.zip_code
+  end
+
   City.create(
     name: Faker::Games::Fallout.unique.location,
-    zip_code: Faker::Address.unique.zip_code
+    zip_code: _zip_code
     )
 end
 
@@ -23,7 +29,7 @@ last_city_id = City.last.id
 
 # Purge the user table before create 10 users to fill it
 User.destroy_all
-User.create(id:11, first_name:"anonymous", last_name:"anonymous", email:"anonymous@anonymous.org", password:"hellohello",city:c,age:999,description:"This is anonymous user")
+
 10.times do
   User.create(
     first_name: Faker::Movies::LordOfTheRings.character,
@@ -39,6 +45,7 @@ end
 # Get the ids of the extremities of the user table
 first_user_id = User.first.id
 last_user_id = User.last.id
+
 
 # Purge the gossip table before create 20 gossips to fill it
 Gossip.destroy_all
@@ -105,4 +112,5 @@ rand(20..40).times do
       recipient: recipient
       )
   end
+  User.create(id:11, first_name:"anonymous", last_name:"anonymous", email:"anonymous@anonymous.org", password:"hellohello",city:City.first,age:999,description:"This is anonymous user")
 end

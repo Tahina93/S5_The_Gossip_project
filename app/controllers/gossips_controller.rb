@@ -15,7 +15,7 @@ class GossipsController < ApplicationController
   end
 
   def create
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user: current_user.id)
+    @gossip = Gossip.new(title: params[:title], content: params[:content], user: current_user)
 
     if @gossip.save
       redirect_to gossips_path(success: true)
@@ -53,10 +53,5 @@ class GossipsController < ApplicationController
     Gossip.find(params[:id])
   end
 
-  def authenticate_user
-    unless current_user
-      flash[:danger] = "Please log in."
-      redirect_to new_session_path
-    end
-  end
+
 end
