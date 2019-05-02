@@ -1,5 +1,6 @@
 class GossipsController < ApplicationController
   before_action :authenticate_user, only: [:create, :new, :edit, :destroy]
+  before_action :is_author?, only: [:edit, :update, :destroy]
   def index()
     @success=params[:success]
     @gossips = Gossip.order(:id).reverse
@@ -30,6 +31,7 @@ class GossipsController < ApplicationController
 
   def update
     @gossip = get_gossip
+
     if @gossip.update(
       title: params[:title],
       content: params[:content]
@@ -59,4 +61,6 @@ class GossipsController < ApplicationController
       redirect_to new_session_path
     end
   end
+
+
 end

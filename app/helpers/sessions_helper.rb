@@ -14,4 +14,11 @@ module SessionsHelper
     end
   end
 
+    def is_author?
+    unless current_user.id == params[:id]
+      flash[:danger] = "Tu n'es pas l'auteur de ce potin."
+      redirect_to root_path
+    end
+  end
+
 end
