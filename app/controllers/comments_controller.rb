@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user, only: [:create, :edit, :destroy]
-  before_action :is_author?, only: [:edit, :update, :destroy]
+  before_action :is_comment_author?, only: [:edit, :update, :destroy]
   def create
     @comment = Comment.create(content: params[:content], user: current_user, gossip: Gossip.find(params[:gossip_id]))
     redirect_to gossip_path(params[:gossip_id])
@@ -8,6 +8,9 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = get_comment
+    puts "*" * 60
+    puts params
+    puts "*" * 60
   end
 
   def update

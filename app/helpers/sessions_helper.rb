@@ -14,11 +14,17 @@ module SessionsHelper
     end
   end
 
-    def is_author?
-    unless current_user.id == params[:id]
+  def is_gossip_author?
+    unless current_user == User.find_by(gossips: Gossip.find(params[:id]))
       flash[:danger] = "Tu n'es pas l'auteur de ce potin."
       redirect_to root_path
     end
   end
 
+  def is_comment_author?
+    unless current_user == User.find_by(comments: Comment.find(params[:id]))
+      flash[:danger] = "Tu n'es pas l'auteur de ce commentaire."
+      redirect_to root_path
+    end
+  end
 end

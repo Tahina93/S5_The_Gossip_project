@@ -1,6 +1,7 @@
 class GossipsController < ApplicationController
   before_action :authenticate_user, only: [:create, :new, :edit, :destroy]
-  before_action :is_author?, only: [:edit, :update, :destroy]
+  before_action :is_gossip_author?, only: [:edit, :update, :destroy]
+  
   def index()
     @success=params[:success]
     @gossips = Gossip.order(:id).reverse

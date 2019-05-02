@@ -31,9 +31,13 @@
             <div class="comment">
               <p><strong><%= comment.user.first_name + " " + comment.user.last_name %></strong></p>
               <div><%= comment.content %></div>
-              <% if current_user == comment.user %>
-              <p><%= link_to "Modifier", edit_gossip_comment_path(@gossip.id, comment.id), class: "btn btn-warning"%></p>
+              <% unless current_user == comment.user %>
+                <p style="visibility: hidden">
+              <%else%>
+                <p>
               <% end %>
+                  <%= link_to "Modifier", edit_gossip_comment_path(@gossip.id, comment.id), class: "btn btn-warning"%>
+                </p>
             </div>
           <% end %>
         <% else %>
