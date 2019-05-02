@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def new
-    puts "asticot"
     @cities = get_city
   end
 
