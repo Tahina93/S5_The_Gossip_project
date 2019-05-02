@@ -21,6 +21,7 @@
       <p><%=link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-info" %>
         <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger" data-method= "delete" data-confirm= "T'en es certain ?">Supprimer</a>
       </p>
+      <hr />
       <div id="comment-zone">
         <h3>Commentaires</h3>
         <% unless @comments.empty? %>
