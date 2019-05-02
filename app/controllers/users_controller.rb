@@ -1,27 +1,35 @@
 class UsersController < ApplicationController
   def new
-    @cities = City.all.order("name")
+    puts "asticot"
+    @cities = get_city
   end
 
   def create
-    @user = User.new(
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      age:params[:age],
-      city: City.find(params[:city]),
-      description: params[:description],
-      email: params[:email],
-      password: params[:password],
-      password_confirmation: params[:password_confirmation0]
-    )
+    begin
+      @user = User.new(
+        first_name: params[:first_name],
+        last_name: params[:last_name],
+        age:params[:age],
+        city: City.find(params[:city]),
+        description: params[:description],
+        email: params[:email],
+        password: params[:password],
+        password_confirmation: params[:password_confirmation]
+      )
 
-    if @user.save
-      flash.now[:success] = "Nouvel utilisateur enregistré"
-      redirect_to root_path
-    else
-      flash.now[:error] = "Erreur d'enregistrement"
-      render now
-    end
+      if @user.save
+        flash.now[:success] = "Nouvel utilisateur enregistré"
+        redirect_to root_path
+      else
+        flash.now[:error] = "Tu as du oublier de remplir des informations mon petit chat"
+        @cities = get_city
+        render 'new'
+      end
+    rescue Exception => e
+      flash.now[:error] = e.message
+      @cities = get_city
+      render "new"
+    end    
   end
   
   def show
@@ -31,4 +39,13 @@ class UsersController < ApplicationController
   def hidden
     @person = params[:person]
   end
+
+ private
+
+ def get_city
+   City.all.order("name")
+ end
+
 end
+
+
