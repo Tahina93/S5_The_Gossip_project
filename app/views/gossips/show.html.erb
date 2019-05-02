@@ -18,9 +18,11 @@
         <small>de <%= link_to author.first_name + " " + author.last_name, user_path(author.id)%> ( <%=  link_to author.city.name,  city_path(author.city.id)%> ) </small>
       </h2>
       <blockquote class="card-text display-4"><%= @gossip.content %></blockquote>
+      <% if current_user == author %>
       <p><%=link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-info" %>
         <a href="<%= gossip_path(@gossip.id) %>" class="btn btn-danger" data-method= "delete" data-confirm= "T'en es certain ?">Supprimer</a>
       </p>
+      <% end %>
       <hr />
       <div id="comment-zone">
         <h3>Commentaires</h3>
@@ -29,7 +31,9 @@
             <div class="comment">
               <p><strong><%= comment.user.first_name + " " + comment.user.last_name %></strong></p>
               <div><%= comment.content %></div>
+              <% if current_user == comment.user %>
               <p><%= link_to "Modifier", edit_gossip_comment_path(@gossip.id, comment.id), class: "btn btn-warning"%></p>
+              <% end %>
             </div>
           <% end %>
         <% else %>
