@@ -14,10 +14,11 @@ class UsersController < ApplicationController
         email: params[:email],
         password: params[:password],
         password_confirmation: params[:password_confirmation]
-      )
+        )
 
       if @user.save
         flash.now[:success] = "Nouvel utilisateur enregistré"
+        log_in(@user)
         redirect_to root_path
       else
         flash.now[:error] = "Tu as du oublier de remplir des informations mon petit chat"
@@ -28,9 +29,9 @@ class UsersController < ApplicationController
       flash.now[:error] = e.message
       @cities = get_city
       render "new"
-    end    
+    end
   end
-  
+
   def show
     @author = User.find(params[:id])
   end
@@ -39,9 +40,9 @@ class UsersController < ApplicationController
     @person = params[:person]
   end
 
- private
+  private
 
- def get_city
+  def get_city
    City.all.order("name")
  end
 

@@ -1,5 +1,5 @@
 class GossipsController < ApplicationController
-  before_action :authenticate_user, only: [:create, :new]
+  before_action :authenticate_user, only: [:create, :new, :edit, :destroy]
   def index()
     @success=params[:success]
     @gossips = Gossip.order(:id).reverse
@@ -13,11 +13,11 @@ class GossipsController < ApplicationController
 
   def new
   end
-  
-  def create
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user: session[:user_id])
 
-    if @gossip.save  
+  def create
+    @gossip = Gossip.new(title: params[:title], content: params[:content], user: current_user.id)
+
+    if @gossip.save
       redirect_to gossips_path(success: true)
     else
       render 'new'
@@ -50,13 +50,13 @@ class GossipsController < ApplicationController
   private
 
   def get_gossip
-    Gossip.find(params[:id]) 
+    Gossip.find(params[:id])
   end
 
   def authenticate_user
-    unless User.find_by(id: session[:user_id])
+    unless current_user
       flash[:danger] = "Please log in."
       redirect_to new_session_path
     end
-  end  
+  end
 end

@@ -14,7 +14,7 @@ City.destroy_all
   City.create(
     name: Faker::Games::Fallout.unique.location,
     zip_code: Faker::Address.unique.zip_code
-  )
+    )
 end
 
 # Get the ids of the extremities of the city table
@@ -23,6 +23,7 @@ last_city_id = City.last.id
 
 # Purge the user table before create 10 users to fill it
 User.destroy_all
+User.create(id:11, first_name:"anonymous", last_name:"anonymous", email:"anonymous@anonymous.org", password:"hellohello",city:c,age:999,description:"This is anonymous user")
 10.times do
   User.create(
     first_name: Faker::Movies::LordOfTheRings.character,
@@ -30,8 +31,9 @@ User.destroy_all
     description: Faker::TvShows::BojackHorseman.quote,
     email: Faker::Internet.unique.email,
     age: rand(18..99),
-    city: City.find(rand(first_city_id..last_city_id))
-  )
+    city: City.find(rand(first_city_id..last_city_id)),
+    password: "000000"
+    )
 end
 
 # Get the ids of the extremities of the user table
@@ -41,11 +43,15 @@ last_user_id = User.last.id
 # Purge the gossip table before create 20 gossips to fill it
 Gossip.destroy_all
 20.times do
+  _title = ""
+  while _title.length <= 1 || _title.length > 14 do
+    _title= Faker::Book.title
+  end
   Gossip.create(
-    title: Faker::Book.title,
+    title: _title,
     content: Faker::Movie.quote + ". " + Faker::Movies::StarWars.quote,
     user: User.find(rand(first_user_id..last_user_id))
-  )
+    )
 end
 
 # Get the ids of the extremities of the gossip table
@@ -74,7 +80,7 @@ rand(0..20).times do
   TagGossipLink.create(
     gossip: Gossip.find(rand(first_gossip_id..last_gossip_id)),
     tag: Tag.find(rand(first_tag_id..last_tag_id))
-  )
+    )
 end
 
 # Purge the tables about the private messages. Then create a random number of
@@ -85,7 +91,7 @@ rand(20..40).times do
   pm = PrivateMessage.create(
     sender: User.find(rand(first_user_id..last_user_id)),
     content: "\"#{Faker::Games::WorldOfWarcraft.quote}\" dixit #{Faker::Games::WorldOfWarcraft.hero}\n\"#{Faker::Games::Fallout.quote}\" answered #{Faker::Games::Fallout.character}"
-  )
+    )
   recipients = Array.new
 
   rand(1..10).times do
@@ -97,6 +103,6 @@ rand(20..40).times do
     RecipientToPmLink.create(
       received_message: pm,
       recipient: recipient
-    )
+      )
   end
 end
