@@ -25,12 +25,24 @@
       <h5 class="card-title"><%= gossip.title %></h5>
       <p class="card-text"><%= gossip.content %></p>
       <a href="<%= gossip_path(gossip.id)%>" class="btn btn-primary">En savoir plus</a>
+      <!--Likes-->
+      <% already_liked=false%>
+      <% gossip.likes.each do |like|%>
+      <%if like.user == current_user then already_liked = true end%>
+      <%end%>
+      <%case already_liked %>
+      <%when false %>
+      <a class= "btn btn-secondary" data-method= "post" href="<%= gossip_likes_path(id: gossip.id, gossip_id: gossip.id) %>"> 👍</a>
+      <%when true %>
+      <a class= "btn btn-success active" data-method= "delete" href="<%= gossip_like_path(id: gossip.id, gossip_id: gossip.id) %>"> 👍</a>
+      <%end%>
+      <!--Footer-->
     </div>
     <div class="card-footer text-muted">
       <p>Modifié le : <%= gossip.updated_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
       <p><%= gossip.comments.count %> commentaire<%= "s" if gossip.comments.count > 1 %>
        - <%= gossip.likes.count %> like<%= "s" if gossip.likes.count > 1 %></p>
-    </div>
-  </div>
-<% end %>
-<!-- /.container -->
+     </div>
+   </div>
+   <% end %>
+   <!-- /.container -->

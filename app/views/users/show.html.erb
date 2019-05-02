@@ -1,24 +1,35 @@
 <div class="card text-center">
-    <div class="card-header">
-      <h1><%= @author.first_name + " " + @author.last_name %></h1>
+  <div class="card-header">
+    <h1><%= @author.first_name + " " + @author.last_name %></h1>
+  </div>
+  <div class="card-body text-left">
+    <p><strong>Nom&nbsp;:</strong> <%= @author.last_name %></p>
+    <p><strong>Prénom&nbsp;:</strong> <%= @author.first_name %></p>
+    <p><strong>Âge&nbsp;:</strong> <%= @author.age %></p>
+    <p><strong>E-mail&nbsp;:</strong> <%= @author.email %></p>
+    <p><strong>Adresse&nbsp;:</strong> <%= link_to @author.city.name, city_path(@author.city.id) %>  ( <%= @author.city.zip_code %> )</p>
+    <dl>
+      <dt><strong>Description&nbsp;:</strong></dt>
+      <dd><%= @author.description %></dd>
     </div>
-    <div class="card-body text-left">
-      <p><strong>Nom&nbsp;:</strong> <%= @author.last_name %></p>
-      <p><strong>Prénom&nbsp;:</strong> <%= @author.first_name %></p>
-      <p><strong>Âge&nbsp;:</strong> <%= @author.age %></p>
-      <p><strong>E-mail&nbsp;:</strong> <%= @author.email %></p>
-      <p><strong>Adresse&nbsp;:</strong> <%= link_to @author.city.name, city_path(@author.city.id) %>  ( <%= @author.city.zip_code %> )</p>
-      <dl>
-        <dt><strong>Description&nbsp;:</strong></dt>
-        <dd><%= @author.description %></dd>
-      </div>
-      <hr/>
-      <h3>Ses potins&nbsp;:</h3>
-      <p>
+    <hr/>
+    <h3>Ses potins&nbsp;:</h3>
+    <p>
       <% @author.gossips.each do |gossip| %>
-        <%= link_to gossip.title, gossip_path(gossip.id) %><br/>
+      <!--Likes-->
+      <% already_liked=false%>
+      <% gossip.likes.each do |like|%>
+      <%if like.user == current_user then already_liked = true end%>
+      <%end%>
+      <%case already_liked %>
+      <%when false %>
+      <a class= "btn btn-secondary" data-method= "post" href="<%= gossip_likes_path(id: gossip.id, gossip_id: gossip.id) %>"> 👍</a>
+      <%when true %>
+      <a class= "btn btn-success active" data-method= "delete" href="<%= gossip_like_path(id: gossip.id, gossip_id: gossip.id) %>"> 👍</a>
+      <%end%>
+      <%= link_to gossip.title + " (#{gossip.likes_amount.to_s} likes)", gossip_path(gossip.id) %><br/>
       <% end %>
-      </p>  
+    </p>
     <div class="card-footer text-muted text-center">
       <a href="<%= root_path%>" class="btn btn-primary">Page d'accueil</a>
     </div>
