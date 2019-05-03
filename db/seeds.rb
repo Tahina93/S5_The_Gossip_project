@@ -27,6 +27,7 @@ end
 first_city_id = City.first.id
 last_city_id = City.last.id
 
+Like.destroy_all
 # Purge the user table before create 10 users to fill it
 User.destroy_all
 
